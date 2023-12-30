@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card, Divisor, LeftOfCard, RightOfCard } from './cardProducts.styles'
 
 interface IProductCardProps {

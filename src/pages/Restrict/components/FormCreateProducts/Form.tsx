@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form, TextInput, FileInput, Divisor, Button, Label } from './form.styles';
 import { addProductToLocalStorage } from '../../../../services/localStorageProducts';
-import { randomUUID } from 'crypto';
+
 
 export const FormCreateProducts = () => {
   const initialProductData = {
