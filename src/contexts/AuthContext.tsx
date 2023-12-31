@@ -30,6 +30,7 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
   const login = async (data: IFormData) => {
     try {
       const response = await api.post(`${url}/login`, data);
+      console.log(api, url, data)
 
       if (response.status === 200) {
         const userData = response.data;
