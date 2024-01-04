@@ -15,10 +15,9 @@ export const LeftOfCard = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+
 
     & h1 {
-
         font-size: 1em;
     }
 `
@@ -35,3 +34,17 @@ export const RightOfCard = styled.div`
         width: 100%;
     }
 `
+
+export const ExcludeButton = styled.button`
+    background-color: #f8f8f8;
+    cursor: pointer;
+    margin: 0.5em;
+    width: 1.5em;
+    width: 1.5em;
+    border-radius: 50%;
+    border: none;
+
+    &:hover {
+        background-color: red;
+    }
+`;

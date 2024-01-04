@@ -3,9 +3,9 @@ import { Container, Main, ContainerForm, ContainerProducts, UserName, Title, Pro
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { GetAllLocalStorage } from '../../services/localStorageLogin';
-import { GetAllLocalStorage as GetProductsLocalStorage } from '../../services/localStorageProducts';
 import { FormCreateProducts } from './components/FormCreateProducts/Form';
 import { CardProducts } from './components/CardProducts/cardProducts';
+import { GetAllProductsLocalStorage } from '../../services/localStorageProducts';
 
 
 interface IUserData {
@@ -51,7 +51,7 @@ export const RestrictArea = () => {
   }, [isLoggedIn, navigate, userId, token, setIsLoggedIn]);
 
   useEffect(() => {
-    const products = GetProductsLocalStorage()
+    const products = GetAllProductsLocalStorage()
 
     setProducts(products?.products);
   }, [setProducts])

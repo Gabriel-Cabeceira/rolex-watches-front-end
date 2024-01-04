@@ -13,7 +13,7 @@ export const Container = styled.div`
     justify-content: space-between;
 `
 
-export const ContainerForm = styled.div`
+export const ContainerCart = styled.div`
 
     width: 55%;
     height: 60vh;
@@ -21,6 +21,7 @@ export const ContainerForm = styled.div`
     flex-direction: column;
     align-items: center;
     background-color: #f8f8f8;
+    overflow-y: auto;
 `
 
 export const ContainerProducts = styled.div`
@@ -46,5 +47,24 @@ export const ProductsList = styled.ul`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+`
 
+export const Price = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+export const FinishPurchase = styled.button`
+    width: 10em;
+    background-color: #0b3f27;
+    color: #FFFFFF;
+    cursor: pointer;
+    border: none;
+    padding: 1em;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: #196e48;
+    }
 `

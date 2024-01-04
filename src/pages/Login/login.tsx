@@ -3,8 +3,9 @@ import { Button, ContainerLogin, Divisor, FormLogin, Input, Message, RolexLogo, 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
-import { GetAllLocalStorage, createLocalStorage } from '../../services/localStorageProducts';
+import { GetAllProductsLocalStorage, createProductsLocalStorage } from '../../services/localStorageProducts';
 import { Link } from 'react-router-dom';
+import { GetAllCartLocalStorage, createCartLocalStorage } from '../../services/localStorageCart';
 
 
 export interface FormData {
@@ -14,10 +15,16 @@ export interface FormData {
 
 export const Login = () => {
 
-    const productStorage = GetAllLocalStorage();
+    const productStorage = GetAllProductsLocalStorage();
+
+    const cartStorage = GetAllCartLocalStorage();
 
     if(!productStorage) {
-      createLocalStorage();
+        createProductsLocalStorage();
+    }
+
+    if(!cartStorage) {
+        createCartLocalStorage();
     }
 
     const [invalidData, setInvalidData] = useState<boolean>(false);

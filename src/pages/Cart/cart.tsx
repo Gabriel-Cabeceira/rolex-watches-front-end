@@ -1,72 +1,62 @@
-// import { useContext, useEffect, useState } from 'react';
-import { Container, Main, ContainerForm, ContainerProducts, Title, ProductsList } from './cart.styles';
-// import { useNavigate } from 'react-router-dom';
-// import { AuthContext } from '../../contexts/AuthContext';
-// import { GetAllLocalStorage } from '../../services/localStorageLogin';
-// import { GetAllLocalStorage as GetProductsLocalStorage } from '../../services/localStorageProducts';
-// import { FormCreateProducts } from './components/FormCreateProducts/Form';
-// import { CardProducts } from './components/CardProducts/cardProducts';
+import { useEffect, useState } from 'react';
+import { Container, Main, ContainerCart, ContainerProducts, Title, ProductsList, Price, FinishPurchase } from './cart.styles';
+import { GetAllCartLocalStorage } from '../../services/localStorageCart';
+import { CardProducts } from './components/CardProducts/cardProducts';
 
 
-// interface IUserData {
-//   login: boolean;
-//   userId: string;
-//   name: string;
-//   token: string;
-// }
 
 export const Cart = () => {
-  // const [userData, setUserData] = useState<null | IUserData>(null);
-  // const [products, setProducts] = useState<any>([])
 
-  // const { isLoggedIn, userId, token, setIsLoggedIn } = useContext(AuthContext);
-  // const navigate = useNavigate();
+  const [cartProducts, setCartProducts] = useState<any>([]);
 
-  // useEffect(() => {
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  //   // Access data from localstorage
-  //   const storageData = GetAllLocalStorage();
-  //   const parsedData = storageData ? JSON.parse(storageData) : { login: false };
+  useEffect(() => {
+    const cart = GetAllCartLocalStorage()
 
-  // //   setUserData({
-  // //     login: parsedData.login,
-  // //     userId: parsedData.userId,
-  // //     name: parsedData.userName,
-  // //     token: parsedData.token,
-  // //   });            
+    setCartProducts(cart?.cart);
+  }, [setCartProducts])
 
-  // //   const getData = async () => {
-  // //     try {
+  useEffect(() => {
 
-  // //       if (!parsedData.login) {
-  // //         navigate('/login');
-  // //       }
+    const calculateTotalPrice = () => {
+      if (cartProducts.length > 0) {
+        const total = cartProducts.reduce((accumulator: any, product: any) => {
+          // Supondo que cada produto tenha um campo "price"
+          const productPrice = product.price || 0;
+          return accumulator + productPrice;
+        }, 0);
+        setTotalPrice(total);
+      } else {
+        setTotalPrice(0);
+      }
+    };
 
-  // //     } catch (error) {
-  // //       console.error('Erro ao obter dados do usuário:', error);
-  // //     }
-  // //   };
-
-  // //   getData();
-  // // }, [isLoggedIn, navigate, userId, token, setIsLoggedIn]);
-
-  // // useEffect(() => {
-  // //   const products = GetProductsLocalStorage()
-
-  // //   setProducts(products?.products);
-  // // }, [setProducts])
+    calculateTotalPrice();
+  }, [cartProducts]);
 
   return (
     <Main>
       <Container>
-        <ContainerForm>
+        <ContainerCart>
           <Title>Carrinho</Title>
-          <h1>Página em desenvolvimento</h1>
-        </ContainerForm>
+
+          <ProductsList>
+          {cartProducts.map((product: any) => (
+            <CardProducts key={product.id} {...product} />
+          ))}
+        </ProductsList>
+
+        </ContainerCart>
 
         <ContainerProducts>
-        <Title>Finalizar Compra</Title>
-
+          <Title>Finalizar Compra</Title>
+          
+          <Price>
+            <h1>Total: {totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h1>
+            <FinishPurchase>Finalizar compra</FinishPurchase>
+          </Price>
+        
         <ProductsList>
 
         </ProductsList>

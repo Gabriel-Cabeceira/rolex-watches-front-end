@@ -1,8 +1,9 @@
 import {  useState } from 'react';
 import { Button, ContainerLogin, Divisor, FormLogin, Input, AlertMessage, PositiveMessage, RolexLogo } from './signOn.styles';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { GetAllLocalStorage, createLocalStorage } from '../../services/localStorageProducts';
+import { GetAllProductsLocalStorage, createProductsLocalStorage } from '../../services/localStorageProducts';
 import { api, url } from '../../services/api';
+import { GetAllCartLocalStorage, createCartLocalStorage } from '../../services/localStorageCart';
 
 interface FormData {
   email: string;
@@ -12,10 +13,16 @@ interface FormData {
 }
 
 export const SignOn = () => {
-  const productStorage = GetAllLocalStorage();
+  const productStorage = GetAllProductsLocalStorage();
+
+  const cartStorage = GetAllCartLocalStorage();
 
   if (!productStorage) {
-    createLocalStorage();
+    createProductsLocalStorage();
+  }
+
+  if(!cartStorage) {
+    createCartLocalStorage();
   }
 
   const [invalidData, setInvalidData] = useState<boolean>(false);
